@@ -1,0 +1,1 @@
+{"extends":"../tsconfig.json","include":["../otel-compact/src/*.d.ts","neg.js"]}

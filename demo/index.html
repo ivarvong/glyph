@@ -1,0 +1,149 @@
+<title>Glyph Playground</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* Layout: a workbench. Controls in a left rail, the render on a dark stage at device pixels,
+   instruments (stats, shaping, trace) under it, like a scope's readout. */
+:root {
+  --ink: #0b0b0e; --rail: #111116; --plate: #15151b; --rule: #26262e;
+  --paper: #ecebe7; --dim: #8d8c96; --orange: #f38020; --amber: #fbad41; --hit: #7ee0a1; --bad: #ff7b72;
+  --serif: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--ink); color: var(--paper); font: 15px/1.5 var(--serif); }
+.wrap { max-width: 1480px; margin: 0 auto; padding-block: 28px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 22px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 20px; }
+h1 { margin: 0; font: 600 30px/1.1 var(--serif); letter-spacing: -.01em; }
+h1 em { font-style: normal; color: var(--orange); }
+header p { margin: 0; color: #bdbcb6; max-width: 80ch; }
+.grid { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 22px; align-items: start; }
+@media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+aside { background: var(--rail); border: 1px solid var(--rule); border-radius: 8px; padding: 16px; display: grid; gap: 16px; }
+label, legend { display: block; font: 500 11px/1.3 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin-bottom: 6px; }
+fieldset { border: 0; padding: 0; margin: 0; }
+textarea, select, input[type=number] { width: 100%; background: var(--ink); color: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 10px; font: 14px/1.4 var(--mono); }
+textarea { min-height: 84px; resize: vertical; }
+input[type=range] { width: 100%; accent-color: var(--orange); }
+input[type=color] { width: 44px; height: 30px; padding: 0; border: 1px solid var(--rule); border-radius: 6px; background: none; }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.seg { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label { margin: 0; text-align: center; padding: 8px 2px; cursor: pointer; letter-spacing: .04em; font-size: 11.5px; color: var(--dim); }
+.seg input:checked + label { background: var(--paper); color: var(--ink); }
+.seg input:focus-visible + label { outline: 2px solid var(--orange); outline-offset: -2px; }
+.presets { display: flex; flex-wrap: wrap; gap: 6px; }
+button { font: 500 12px/1 var(--mono); color: var(--paper); background: var(--plate); border: 1px solid var(--rule); border-radius: 999px; padding: 8px 12px; cursor: pointer; }
+button:hover { border-color: var(--orange); }
+button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+.note { font: 12px/1.5 var(--mono); color: var(--dim); margin: 0; }
+#error { color: var(--bad); font: 13px/1.5 var(--mono); margin: 0; }
+main { display: grid; gap: 14px; min-width: 0; }
+[role=tablist] { display: flex; gap: 4px; border-bottom: 1px solid var(--rule); }
+[role=tab] { border-radius: 6px 6px 0 0; border-bottom: 0; background: none; color: var(--dim); }
+[role=tab][aria-selected=true] { background: var(--plate); color: var(--paper); border-color: var(--rule); }
+.plate { position: relative; background: var(--plate); border: 1px solid var(--rule); border-radius: 8px; padding: 16px; overflow: auto; max-height: 72vh; min-height: 160px; }
+#stage[data-bg=transparent] .plate.img { background-color: #2a2a31; background-image: linear-gradient(45deg, #34343c 25%, transparent 25%, transparent 75%, #34343c 75%), linear-gradient(45deg, #34343c 25%, transparent 25%, transparent 75%, #34343c 75%); background-size: 16px 16px; background-position: 0 0, 8px 8px; }
+.plate img { display: block; max-width: none; image-rendering: auto; cursor: crosshair; }
+#stage[aria-busy=true] .plate img { opacity: .55; }
+@media (prefers-reduced-motion: no-preference) { .plate img { transition: opacity .12s; } }
+#loupe { position: absolute; width: 180px; height: 180px; border-radius: 50%; pointer-events: none; border: 2px solid var(--orange); box-shadow: 0 10px 40px #000a; background-repeat: no-repeat; image-rendering: pixelated; background-color: var(--ink); }
+dl#stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px 18px; margin: 0; font: 12.5px/1.4 var(--mono); }
+dl#stats dt { color: var(--dim); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+dl#stats dd { margin: 0; color: var(--paper); font-variant-numeric: tabular-nums; word-break: break-all; }
+dl#stats dd.hit { color: var(--hit); }
+.glyphrow { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
+.chip { display: grid; justify-items: center; min-width: 34px; padding: 5px 6px 4px; border: 1px solid var(--rule); border-radius: 5px; background: var(--ink); font: 11px/1.2 var(--mono); }
+.chip b { font: 600 17px/1.2 var(--serif); color: var(--paper); }
+.chip span { color: var(--dim); }
+.chip i { font-style: normal; color: var(--amber); }
+.chip.lig { border-color: var(--orange); background: #2a1708; }
+.chip.kern { border-style: dashed; border-color: var(--amber); }
+.chip.fallback { border-color: #7aa2f7; background: #10182b; }
+.chip.missing { border-color: var(--bad); }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font: 12px/1.4 var(--mono); color: var(--dim); margin: 0 0 12px; }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; border: 1px solid; }
+.legend .l::before { border-color: var(--orange); background: #2a1708; }
+.legend .k::before { border: 1px dashed var(--amber); }
+.legend .f::before { border-color: #7aa2f7; background: #10182b; }
+.trow { display: grid; grid-template-columns: minmax(120px, 210px) minmax(0, 1fr) 120px; gap: 12px; align-items: center; font: 12.5px/1.4 var(--mono); padding: 3px 0; }
+.tname { color: var(--paper); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tbar { height: 10px; background: var(--ink); border-radius: 3px; overflow: hidden; }
+.tbar span { display: block; height: 100%; background: linear-gradient(90deg, var(--orange), var(--amber)); }
+.tval { color: var(--dim); text-align: right; font-variant-numeric: tabular-nums; }
+code { font: 13px var(--mono); color: var(--amber); }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>glyph <em>playground</em></h1>
+    <p>The real renderer, running in this page: WOFF2 decoding, GSUB/GPOS shaping, flattening, exact scan conversion and pure-JS deflate. Nothing here uses the browser's text engine. Renders at your screen's pixel ratio.</p>
+  </header>
+
+  <div class="grid">
+    <aside>
+      <div>
+        <label>Try</label>
+        <div class="presets">
+          <button data-preset="cloudflare">Cloudflare</button>
+          <button data-preset="ligatures">Ligatures &amp; kerning</button>
+          <button data-preset="code">Code ligatures</button>
+          <button data-preset="ring">Ring</button>
+          <button data-preset="spiral">Spiral</button>
+          <button data-preset="fallback">Font fallback</button>
+        </div>
+      </div>
+      <div><label for="text">Text</label><textarea id="text" spellcheck="false">Cloudflare</textarea></div>
+      <div class="two">
+        <div><label for="face">Font</label><select id="face"><option value="inter">Inter</option><option value="serif">Source Serif 4</option><option value="mono">JetBrains Mono</option></select></div>
+        <div><label for="size">Size <span id="sizeval" style="text-transform:none;letter-spacing:0">96 px</span></label><input id="size" type="range" min="8" max="160" value="96"></div>
+      </div>
+      <fieldset>
+        <legend>Layout</legend>
+        <div class="seg">
+          <input type="radio" name="layout" id="lay-line" value="line" checked><label for="lay-line">Lines</label>
+          <input type="radio" name="layout" id="lay-circle" value="circle"><label for="lay-circle">Circle</label>
+          <input type="radio" name="layout" id="lay-sine" value="sine"><label for="lay-sine">Sine</label>
+          <input type="radio" name="layout" id="lay-spiral" value="spiral"><label for="lay-spiral">Spiral</label>
+        </div>
+      </fieldset>
+      <div id="wave" class="two" hidden>
+        <div><label for="amp">Amplitude (em)</label><input id="amp" type="range" min="0.1" max="2" step="0.05" value="0.8"></div>
+        <div><label for="wavelength">Wavelength (em)</label><input id="wavelength" type="range" min="2" max="20" step="0.5" value="8"></div>
+      </div>
+      <div class="two">
+        <div><label>Colour</label><div class="row"><input id="color" type="color" value="#f38020" aria-label="Start colour"><input id="color2" type="color" value="#fbad41" aria-label="End colour"><label class="row" style="margin:0;text-transform:none;letter-spacing:0;font-size:12px"><input id="grad" type="checkbox" checked> gradient</label></div></div>
+        <div><label for="bg">Background</label><select id="bg"><option value="ink">Ink</option><option value="paper">Paper</option><option value="transparent">Transparent</option></select></div>
+      </div>
+      <div class="two">
+        <div><label for="rasterizer">Rasterizer</label><select id="rasterizer"><option value="scanline">scanline (exact)</option><option value="accumulate">accumulate</option></select></div>
+        <div><label for="zlib">Deflate</label><select id="zlib"><option value="fast">fast</option><option value="balanced" selected>balanced</option><option value="max">max</option><option value="stored">stored</option><option value="native">native</option></select></div>
+      </div>
+      <p class="note" id="fontload">Loading fonts…</p>
+      <p id="error" role="alert" hidden></p>
+    </aside>
+
+    <main id="stage" aria-busy="true">
+      <div role="tablist" aria-label="Output">
+        <button role="tab" id="t-png" aria-controls="p-png" aria-selected="true">PNG</button>
+        <button role="tab" id="t-svg" aria-controls="p-svg" aria-selected="false">SVG</button>
+        <button role="tab" id="t-shape" aria-controls="p-shape" aria-selected="false">Shaping</button>
+        <button role="tab" id="t-trace" aria-controls="p-trace" aria-selected="false">Trace</button>
+      </div>
+      <section role="tabpanel" id="p-png" aria-labelledby="t-png"><div class="plate img" id="pngplate"><img id="png" alt="Rendered PNG"><div id="loupe" hidden></div></div></section>
+      <section role="tabpanel" id="p-svg" aria-labelledby="t-svg" hidden><div class="plate img"><img id="svg" alt="Rendered SVG"></div></section>
+      <section role="tabpanel" id="p-shape" aria-labelledby="t-shape" hidden><div class="plate">
+        <p class="legend"><span class="l">ligature (one glyph, several characters)</span><span class="k">kerned (advance &plusmn; css px)</span><span class="f">from a fallback font</span></p>
+        <div id="shaping"></div></div></section>
+      <section role="tabpanel" id="p-trace" aria-labelledby="t-trace" hidden><div class="plate"><div id="trace"></div><p class="note" id="tracenote"></p></div></section>
+      <dl id="stats"></dl>
+      <p class="note">Hover the PNG for its raw pixels at 4&times;. Change nothing and re-render to see the content-addressed L1 cache hit. The key is the SHA-256 of the scene's paths, transforms, fills and settings.</p>
+    </main>
+  </div>
+</div>
+
+<script type="module">/*APP*/</script>

@@ -1,0 +1,16 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>glyph browser check</title>
+<pre id="out">pending</pre>
+<script type="module">
+  import { pipeline } from './pipeline.js';
+  const hex = (buf) => [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
+  try {
+    const out = await pipeline(async (p) => new Uint8Array(await (await fetch(`/${p}`)).arrayBuffer()));
+    const hashes = {};
+    for (const [k, v] of Object.entries(out)) hashes[k] = hex(await crypto.subtle.digest('SHA-256', v));
+    document.getElementById('out').textContent = JSON.stringify({ ua: navigator.userAgent.match(/(HeadlessChrome|Chrome)\/[\d.]+/)?.[0], hashes });
+  } catch (e) {
+    document.getElementById('out').textContent = JSON.stringify({ error: String(e && e.stack || e) });
+  }
+</script>

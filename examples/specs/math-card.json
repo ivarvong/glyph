@@ -1,0 +1,15 @@
+{
+  "glyph": 1,
+  "size": [1200, 630],
+  "background": "#FBF7EF",
+  "fonts": {
+    "math": { "url": "https://mirrors.ctan.org/fonts/lm-math/opentype/latinmodern-math.otf", "sha256": "6075562b771f8b82f0c179e363389684f2dd09de30038269e2628e504bd7be0f" }
+  },
+  "params": { "formula": "\\int_{-\\infty}^{\\infty} e^{-x^2}\\,dx = \\sqrt{\\pi}" },
+  "items": [
+    { "rect": [0, 0, 1200, 8], "paint": "#C2410C" },
+    { "math": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}", "font": "math", "size": 64, "at": [600, 170], "display": true, "align": "center", "paint": "#17150F" },
+    { "math": "${formula}", "font": "math", "size": 64, "at": [600, 360], "display": true, "align": "center", "paint": "#17150F" },
+    { "math": "e^{i\\pi} + 1 = 0", "font": "math", "size": 56, "at": [600, 530], "align": "center", "paint": { "linear": [480, 0, 720, 0], "stops": [[0, "#C2410C"], [1, "#7B5EA7"]] } }
+  ]
+}

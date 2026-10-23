@@ -1,0 +1,9 @@
+{
+  "name": "glyph-conform",
+  "private": true,
+  "type": "module",
+  "description": "Conformance and differential oracles for glyph. Dev only; the library has no dependencies.",
+  "devDependencies": {
+    "fontkit": "2.0.4"
+  }
+}

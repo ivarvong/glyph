@@ -1,0 +1,17 @@
+node_modules/
+out/
+sim/node_modules/
+sim/out/
+conform/node_modules/
+conform/.ext/
+.wrangler/
+__pycache__/
+*.pyc
+fuzz/corpus/
+fuzz/findings/*.bin
+.dev.vars*
+.env*
+# npm run fetch: every third-party input and everything derived from one (scripts/manifest.js)
+third_party/
+woff2/src/brotli-data.js
+shape/src/ccc-data.js

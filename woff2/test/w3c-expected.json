@@ -1,0 +1,52 @@
+{
+ "valid-005": {
+  "via": "google/woff2 woff2_decompress fb9c337 \u2192 fontTools",
+  "numGlyphs": 4,
+  "advances": [
+   1536,
+   1536,
+   4719,
+   4708
+  ],
+  "lsbs": [
+   0,
+   0,
+   205,
+   205
+  ]
+ },
+ "tabledata-transform-hmtx-001": {
+  "via": "google/woff2 woff2_decompress fb9c337 \u2192 fontTools",
+  "numGlyphs": 4,
+  "advances": [
+   1536,
+   1536,
+   4719,
+   4708
+  ],
+  "lsbs": [
+   0,
+   0,
+   205,
+   205
+  ]
+ },
+ "datatypes-alt-255uint16-001": {
+  "via": "google/woff2 woff2_decompress fb9c337 \u2192 fontTools",
+  "numGlyphs": 5,
+  "advances": [
+   1536,
+   1536,
+   4719,
+   4708,
+   4708
+  ],
+  "lsbs": [
+   0,
+   0,
+   205,
+   205,
+   0
+  ]
+ }
+}

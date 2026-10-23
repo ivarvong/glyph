@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "glyph",
+  "main": "worker/src/index.js",
+  "compatibility_date": "2026-09-01",
+  "observability": { "enabled": true },
+  // "/" is the playground (demo/, built by demo/build.js); anything that isn't a file
+  // (/render, /healthz) falls through to the Worker.
+  "build": { "command": "node scripts/fetch.js --runtime && node demo/build.js" },
+  "assets": { "directory": "out/demo" },
+  // Stored specs (POST /specs, GET /render?id=); without it those answer 501.
+  "r2_buckets": [{ "binding": "SPECS", "bucket_name": "glyph-specs" }],
+  "exports": {
+    "default": { "type": "worker" },
+    "Renders": { "type": "worker", "cache": { "enabled": true } }
+  }
+}

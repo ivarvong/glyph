@@ -1,0 +1,176 @@
+{
+ "glyph": 1,
+ "size": [
+  1200,
+  630
+ ],
+ "background": "#0E1116",
+ "fonts": {
+  "display": {
+   "url": "https://cdn.jsdelivr.net/npm/@fontsource/inter@5.3.0/files/inter-latin-400-normal.woff2",
+   "sha256": "8909904ab6c872eb994093482a88a28eca2cd95912d7b6fecd72103b0dc07edc"
+  },
+  "serif": {
+   "url": "https://raw.githubusercontent.com/adobe-fonts/source-serif/2823e993c53fca27c5c8749f529b56a5a7c77b6b/WOFF2/OTF/SourceSerif4-Regular.otf.woff2",
+   "sha256": "42aa010dbb82d90764a28f6cc7d809a9395999b7390eb3b212028c6975e97402"
+  },
+  "mono": {
+   "url": "https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.1.0/files/jetbrains-mono-latin-400-normal.woff2",
+   "sha256": "7c53386f55c866c1b4c9309c4bcf74eda10896aab3a1780b0af5cc4976e27a27"
+  }
+ },
+ "params": {
+  "title": "GLYPH",
+  "kicker": "Type in, pixels out",
+  "line": "text on a path · outlines · gradients · fit to width"
+ },
+ "items": [
+  {
+   "rect": [
+    0,
+    0,
+    1200,
+    630
+   ],
+   "paint": {
+    "radial": [
+     960,
+     120,
+     700
+    ],
+    "stops": [
+     [
+      0,
+      "#3B82F6"
+     ],
+     [
+      0.45,
+      "#1E3A8A"
+     ],
+     [
+      1,
+      "#0E1116"
+     ]
+    ]
+   }
+  },
+  {
+   "circles": [
+    960,
+    120,
+    180,
+    960,
+    120,
+    120
+   ],
+   "paint": "#93C5FD33",
+   "rule": "evenodd"
+  },
+  {
+   "path": "M 60 560 C 300 470 600 640 1140 520",
+   "stroke": {
+    "width": 3,
+    "cap": "round"
+   },
+   "paint": "#93C5FD"
+  },
+  {
+   "text": "${line}",
+   "font": "mono",
+   "size": 20,
+   "tracking": 1,
+   "on": {
+    "path": "M 60 545 C 300 455 600 625 1140 505",
+    "spacing": "fit"
+   },
+   "paint": "#E0F2FE"
+  },
+  {
+   "text": "${kicker}",
+   "font": "serif",
+   "size": 54,
+   "at": [
+    64,
+    140
+   ],
+   "paint": "#93C5FD",
+   "fit": 700
+  },
+  {
+   "text": "${title}",
+   "font": "display",
+   "size": 190,
+   "tracking": 2,
+   "at": [
+    60,
+    360
+   ],
+   "outline": [
+    {
+     "width": 14,
+     "paint": "#0E1116"
+    }
+   ],
+   "paint": {
+    "linear": [
+     0,
+     200,
+     0,
+     360
+    ],
+    "stops": [
+     [
+      0,
+      "#E0F2FE"
+     ],
+     [
+      0.5,
+      "#60A5FA"
+     ],
+     [
+      1,
+      "#1D4ED8"
+     ]
+    ]
+   },
+   "fit": 1080
+  },
+  {
+   "text": "GLYPH · SPEC v1 · ",
+   "font": "mono",
+   "size": 13,
+   "tracking": 3,
+   "on": {
+    "circle": [
+     960,
+     120,
+     150
+    ],
+    "fit": true
+   },
+   "paint": "#E0F2FE"
+  },
+  {
+   "group": [
+    {
+     "star": [
+      0,
+      0,
+      5,
+      22,
+      9
+     ],
+     "paint": "#E0F2FE"
+    }
+   ],
+   "transform": [
+    1,
+    0,
+    0,
+    1,
+    960,
+    120
+   ]
+  }
+ ]
+}

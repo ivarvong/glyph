@@ -1,0 +1,10 @@
+{
+  "name": "glyph-sim",
+  "private": true,
+  "type": "module",
+  "description": "Local Workers simulator: real workerd for the runtime, plus models for what it does not do locally. Dev only.",
+  "devDependencies": {
+    "workerd": "1.20261004.1",
+    "esbuild": "0.24.0"
+  }
+}

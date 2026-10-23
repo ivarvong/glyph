@@ -1,0 +1,1 @@
+{"name":"@glyph/woff2","private":true,"version":"0.1.0","type":"module","exports":{".":"./src/woff2.js","./brotli":"./src/brotli.js"},"scripts":{"test":"node --test"}}

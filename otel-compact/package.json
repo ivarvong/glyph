@@ -1,0 +1,1 @@
+{"name":"otel-compact","private":true,"version":"0.1.0","type":"module","bin":{"otc":"bin/otc.js"},"exports":{".":"./src/trace.js","./read":"./src/read.js","./node":"./src/node.js","./adt":"./src/adt.js"},"scripts":{"test":"node --test"}}

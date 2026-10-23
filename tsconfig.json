@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "allowJs": true,
+    "noEmit": true,
+    "strict": true,
+    "target": "es2022",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "types": [],
+    "lib": [
+      "es2022",
+      "dom"
+    ]
+  },
+  "include": [
+    "otel-compact/src/*.d.ts",
+    "otel-compact/src/trace.js",
+    "otel-compact/src/read.js",
+    "woff2/src/*.js",
+    "sfnt/src/*.js",
+    "shape/src/*.js",
+    "outline/src/*.js",
+    "render/src/*.js",
+    "draw/src/*.js",
+    "spec/src/*.js",
+    "math/src/*.js",
+    "worker/src/app.js",
+    "cache/src/policy.js",
+    "cache/src/key.js",
+    "cache/src/layers.js",
+    "cache/src/render.js",
+    "cache/index.js",
+    "net/src/*.js",
+    "index.js"
+  ]
+}

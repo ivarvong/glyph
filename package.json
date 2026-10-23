@@ -1,0 +1,38 @@
+{
+  "name": "glyph",
+  "private": true,
+  "type": "module",
+  "description": "Pure-JS WOFF2 text renderer: SVG and PNG. Zero runtime dependencies.",
+  "scripts": {
+    "fetch": "node scripts/fetch.js",
+    "pretest": "node scripts/fetch.js --check",
+    "test": "node --test 'otel-compact/test/*.test.js' 'woff2/test/*.test.js' 'sfnt/test/*.test.js' 'shape/test/*.test.js' 'render/test/*.test.js' 'draw/test/*.test.js' 'worker/test/*.test.js' 'cache/test/*.test.js' 'net/test/*.test.js' 'fuzz/test/*.test.js' 'math/test/*.test.js' 'spec/test/*.test.js'",
+    "typecheck": "node scripts/fetch.js --runtime && node scripts/lint-values.js && tsc -p . && ! tsc -p types-test > /dev/null && echo 'types: strict ok, negative cases rejected'",
+    "render": "OTEL_COMPACT=jsonl:out/render.jsonl node examples/cloudflare.js && node otel-compact/bin/otc.js summary out/render.jsonl",
+    "verify": "node verify/compare.js",
+    "verify:draw": "node verify/draw.js",
+    "verify:math": "node verify/math.js",
+    "bench": "node bench/span-overhead.js && node bench/raster.js",
+    "tree": "node otel-compact/bin/otc.js tree out/render.jsonl",
+    "sweep": "node --expose-gc bench/sweep.js",
+    "bench:stream": "node --expose-gc bench/stream.js",
+    "bench:poster": "node bench/poster.js",
+    "showcase": "node examples/showcase.js",
+    "worker:check": "node --experimental-strip-types --no-warnings examples/worker-check.js",
+    "posters": "node examples/posters.js",
+    "worker:cached": "node --experimental-strip-types --no-warnings examples/worker-cached-check.js",
+    "worker:fetch": "node --experimental-strip-types --no-warnings examples/worker-fetch-check.js",
+    "demo": "node scripts/fetch.js --runtime && node demo/build.js",
+    "conform": "conform/setup.sh && GOOGLE_WOFF2=conform/.ext/woff2/out/woff2_decompress node conform/w3c.js conform/.ext/woff2-tests conform/.ext",
+    "sim": "cd sim && npm ci --silent --no-audit --no-fund && cd .. && node sim/run.js --check",
+    "sim:quick": "cd sim && npm ci --silent --no-audit --no-fund && cd .. && node sim/run.js --quick --check"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./cache": "./cache/index.js",
+    "./cache/node": "./cache/src/node.js"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3"
+  }
+}

@@ -1,0 +1,218 @@
+{
+"constants": {
+"ScriptPercentScaleDown": -100,
+"ScriptScriptPercentScaleDown": -63,
+"DelimitedSubFormulaMinHeight": 74,
+"DisplayOperatorMinHeight": 111,
+"MathLeading": 48,
+"AxisHeight": 85,
+"AccentBaseHeight": 122,
+"FlattenedAccentBaseHeight": 159,
+"SubscriptShiftDown": 196,
+"SubscriptTopMax": 233,
+"SubscriptBaselineDropMin": 270,
+"SuperscriptShiftUp": 307,
+"SuperscriptShiftUpCramped": 344,
+"SuperscriptBottomMin": 381,
+"SuperscriptBaselineDropMax": 418,
+"SubSuperscriptGapMin": 455,
+"SuperscriptBottomMaxWithSubscript": 492,
+"SpaceAfterScript": 529,
+"UpperLimitGapMin": 566,
+"UpperLimitBaselineRiseMin": 603,
+"LowerLimitGapMin": 640,
+"LowerLimitBaselineDropMin": 677,
+"StackTopShiftUp": 714,
+"StackTopDisplayStyleShiftUp": 751,
+"StackBottomShiftDown": 788,
+"StackBottomDisplayStyleShiftDown": -75,
+"StackGapMin": -38,
+"StackDisplayStyleGapMin": -1,
+"StretchStackTopShiftUp": 36,
+"StretchStackBottomShiftDown": 73,
+"StretchStackGapAboveMin": 110,
+"StretchStackGapBelowMin": 147,
+"FractionNumeratorShiftUp": 184,
+"FractionNumeratorDisplayStyleShiftUp": 221,
+"FractionDenominatorShiftDown": 258,
+"FractionDenominatorDisplayStyleShiftDown": 295,
+"FractionNumeratorGapMin": 332,
+"FractionNumDisplayStyleGapMin": 369,
+"FractionRuleThickness": 406,
+"FractionDenominatorGapMin": 443,
+"FractionDenomDisplayStyleGapMin": 480,
+"SkewedFractionHorizontalGap": 517,
+"SkewedFractionVerticalGap": 554,
+"OverbarVerticalGap": 591,
+"OverbarRuleThickness": 628,
+"OverbarExtraAscender": 665,
+"UnderbarVerticalGap": 702,
+"UnderbarRuleThickness": 739,
+"UnderbarExtraDescender": 776,
+"RadicalVerticalGap": -87,
+"RadicalDisplayStyleVerticalGap": -50,
+"RadicalRuleThickness": -13,
+"RadicalExtraAscender": 24,
+"RadicalKernBeforeDegree": 61,
+"RadicalKernAfterDegree": 98,
+"RadicalDegreeBottomRaisePercent": 135
+},
+"italics": {
+"10": -50,
+"11": -37,
+"12": -24,
+"13": -11,
+"14": 2,
+"15": 15,
+"16": 28,
+"17": 41,
+"18": 54,
+"19": 67
+},
+"topAccent": {
+"3": 210,
+"7": -15
+},
+"extended": [
+21,
+22
+],
+"kerns": {
+"4": {
+"TopRight": {
+"heights": [
+100,
+300
+],
+"kerns": [
+20,
+-10,
+-60
+]
+},
+"TopLeft": null,
+"BottomRight": null,
+"BottomLeft": {
+"heights": [],
+"kerns": [
+35
+]
+}
+},
+"5": {
+"TopRight": null,
+"TopLeft": {
+"heights": [
+250
+],
+"kerns": [
+-5,
+40
+]
+},
+"BottomRight": {
+"heights": [
+-100,
+0,
+200
+],
+"kerns": [
+1,
+2,
+3,
+4
+]
+},
+"BottomLeft": null
+},
+"6": {
+"TopRight": {
+"heights": [
+400
+],
+"kerns": [
+-80,
+-120
+]
+},
+"TopLeft": {
+"heights": [],
+"kerns": [
+0
+]
+},
+"BottomRight": {
+"heights": [
+50
+],
+"kerns": [
+12,
+0
+]
+},
+"BottomLeft": {
+"heights": [
+10,
+20
+],
+"kerns": [
+-1,
+-2,
+-3
+]
+}
+}
+},
+"minConnectorOverlap": 20,
+"vertical": {
+"30": {
+"variants": [
+[
+30,
+1000
+],
+[
+35,
+1500
+]
+],
+"assembly": {
+"italic": 7,
+"parts": [
+[
+32,
+0,
+150,
+600,
+0
+],
+[
+33,
+150,
+150,
+300,
+1
+],
+[
+34,
+150,
+0,
+600,
+0
+]
+]
+}
+}
+},
+"horizontal": {
+"31": {
+"variants": [
+[
+31,
+500
+]
+],
+"assembly": null
+}
+}
+}
